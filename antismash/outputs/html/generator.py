@@ -20,7 +20,7 @@ from antismash.custom_typing import AntismashModule
 def build_json_data(records: List[Record], results: List[Dict[str, module_results.ModuleResults]],
                     options: ConfigType) -> Tuple[
                         List[Dict[str, Any]],
-                        dict[str, dict[str, json.JSONCompatible]],
+                        Dict[str, Dict[str, json.JSONCompatible]],
                     ]:
     """ Builds JSON versions of records and domains for use in drawing SVGs with
         javascript.

@@ -9,6 +9,8 @@ from typing import Any, Optional, Sequence
 
 from Bio.Seq import Seq
 
+from typing import Iterator, List, Tuple, Dict
+
 from antismash.common import path
 from antismash.common.html_renderer import FileTemplate, HTMLSections, Markup, docs_link
 from antismash.common.layers import OptionsLayer, RegionLayer, RecordLayer
@@ -34,7 +36,7 @@ PRE_SEQUENCE_SIZE = 3
 POST_SEQUENCE_SIZE = 3
 
 
-def will_handle(_products: list[str]) -> bool:
+def will_handle(_products: List[str]) -> bool:
     """ Returns true if one or more relevant products or product categories are present """
     return True
 
@@ -97,7 +99,7 @@ def get_sequence_matches(query: str, consensus: str) -> list:
 
 
 def _find_in_contiguous_area(start: int, end: int, genes: Sequence[CDSFeature],
-                             ) -> tuple[Optional[CDSFeature], Optional[CDSFeature], Optional[CDSFeature]]:
+                             ) -> Tuple[Optional[CDSFeature], Optional[CDSFeature], Optional[CDSFeature]]:
     """ Finds the CDS features immediately next to, within, or containing the site with the
         given coordinates, if they exist.
 
@@ -129,7 +131,7 @@ def _find_in_contiguous_area(start: int, end: int, genes: Sequence[CDSFeature],
 
 
 def find_neighbours(start: int, end: int, region: Region,
-                    ) -> tuple[Optional[CDSFeature], Optional[CDSFeature], Optional[CDSFeature]]:
+                    ) -> Tuple[Optional[CDSFeature], Optional[CDSFeature], Optional[CDSFeature]]:
     """ Finds the CDS features immediately next to, within, or containing the site with the
         given coordinates, if they exist. If the region crosses the origin, the neighbouring
         features may include those over the origin from the site.
@@ -198,9 +200,9 @@ def find_neighbours(start: int, end: int, region: Region,
     return left, mid, right
 
 
-def add_neighbouring_genes(hit: dict[str, Any], left: Optional[CDSFeature], mid: Optional[CDSFeature],
+def add_neighbouring_genes(hit: Dict[str, Any], left: Optional[CDSFeature], mid: Optional[CDSFeature],
                            right: Optional[CDSFeature],
-                           ) -> dict[str, Any]:
+                           ) -> Dict[str, Any]:
     """ Adds neighbouring gene information to a JSON-ready representation of a hit
 
         Arguments:
@@ -250,7 +252,7 @@ def add_neighbouring_genes(hit: dict[str, Any], left: Optional[CDSFeature], mid:
 
 
 def generate_js_domains(region: Region, record: Record, results: TFBSFinderResults
-                             ) -> list[dict[str, Any]]:
+                             ) -> List[Dict[str, Any]]:
     """ Generates JSON data for javascript visualisation """
     hits_in_region = results.get_hits_by_region(region.get_region_number())
     if not hits_in_region:

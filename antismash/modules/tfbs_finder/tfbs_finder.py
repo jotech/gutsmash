@@ -343,7 +343,7 @@ def run_moods(sequence: Seq, background: Tuple[float, float, float, float],
     return results
 
 
-def get_valid_areas(start: int, end: int, locations: Iterator[Location], start_overlap: int) -> list[tuple[int, int]]:
+def get_valid_areas(start: int, end: int, locations: Iterator['Location'], start_overlap: int) -> List[Tuple[int, int]]:
     """ Finds areas within the section where a binding site is considered valid.
         Generally these are intergenic areas, but some overlaps with genes are possible.
 
@@ -454,7 +454,7 @@ def filter_hits(matrices: List[Matrix], areas: List[Tuple[int, int]],
     return results
 
 
-def get_cross_origin_areas(record: Record, region: Region, start_overlap: int) -> list[tuple[int, int]]:
+def get_cross_origin_areas(record: Record, region: Region, start_overlap: int) -> List[Tuple[int, int]]:
     """ Finds areas within the section where a binding site is considered valid.
         Generally these are intergenic areas, but some overlaps with genes are possible.
 

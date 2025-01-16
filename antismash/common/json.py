@@ -7,6 +7,9 @@
 from dataclasses import dataclass, field
 from typing import Any, Iterator, List, Tuple, IO, Union, Dict, Callable
 
+from json import loads
+from typing import Dict, Any, IO
+
 from antismash.common.secmet.features import CDSFeature
 from antismash.common.secmet.qualifiers import NRPSPKSQualifier
 from antismash.common.secmet.record import Seq
@@ -69,7 +72,7 @@ def dumps(obj: Any, *, default: Callable[[Any], Any] = _base_convertor, indent: 
     return _dumps(obj, default=default, option=option).decode()
 
 
-def load(handle: IO) -> dict[str, Any]:
+def load(handle: IO) -> Dict[str, Any]:
     """ Reads in JSON text from the given file handle and returns the information using
         standard types.
 
